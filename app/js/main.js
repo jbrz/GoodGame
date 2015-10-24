@@ -1,4 +1,53 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var BadGuy = function BadGuy(x) {
+
+  this.health = 100;
+  this.dmg = x.dmg || _.random(0, 45);
+  this.badName = x.badName;
+  this.warCry = x.warCry;
+  this.deathMsg = x.deathMsg;
+  // this.HealthBar = function(){
+
+  // };
+  // this.hit = function (num) {
+  //   let hitPoints = num || 10;
+  //   return this.health = this.health - hitPoints;
+  // };
+};
+
+exports["default"] = BadGuy;
+module.exports = exports["default"];
+
+},{}],2:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+var GoodGuy = function GoodGuy(x) {
+  this.health = 100;
+  this.dmg = x.dmg || _.random(0, 45);
+  this.goodName = x.goodName;
+  this.warCry = x.warCry || 'Clippity Clop';
+  this.deathMsg = x.deathMsg;
+  // this.HealthBar = function(){
+
+  // };
+  // this.hit = function (num) {
+  //   let hitDmg = num || 1;
+  //   return this.health = this.health - hitDmg;}
+  // };
+};
+
+exports['default'] = GoodGuy;
+module.exports = exports['default'];
+
+},{}],3:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -15,9 +64,46 @@ var _moment = require('moment');
 
 var _moment2 = _interopRequireDefault(_moment);
 
+var _GoodGuy = require('./GoodGuy');
+
+var _GoodGuy2 = _interopRequireDefault(_GoodGuy);
+
+var _BadGuy = require('./BadGuy');
+
+var _BadGuy2 = _interopRequireDefault(_BadGuy);
+
 console.log('Hello, World');
 
-},{"jquery":2,"moment":3,"underscore":4}],2:[function(require,module,exports){
+var Scene = function Scene(x) {
+  this.text = x.text;
+  this.bg = x.bg;
+  this.enemies = x.enemies || null;
+};
+
+var GameStart = function GameStart() {
+  Scene({
+    text: "You must find the holy Rails!",
+    bg: 'images/Start.png'
+  });
+
+  this.options = x.options || ['Start Game', 'Credits', 'Quit Game'];
+  this.start = function (badguy) {
+    var arthur = new _GoodGuy2['default']({
+      dmg: 50,
+      goodName: 'Arthur',
+      warCry: 'For the holiest of Rails!',
+      deathMsg: 'JavaScript...has been...DEFEATED!'
+    });
+    var arthursMount = new _GoodGuy2['default']({
+      dmg: 1,
+      goodName: 'Patsy'
+    });
+  };
+};
+
+// startGame.on('click', function () {};
+
+},{"./BadGuy":1,"./GoodGuy":2,"jquery":4,"moment":5,"underscore":6}],4:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -9229,7 +9315,7 @@ return jQuery;
 
 }));
 
-},{}],3:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 //! moment.js
 //! version : 2.10.6
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -12425,7 +12511,7 @@ return jQuery;
     return _moment;
 
 }));
-},{}],4:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -13975,7 +14061,7 @@ return jQuery;
   }
 }.call(this));
 
-},{}]},{},[1])
+},{}]},{},[3])
 
 
 //# sourceMappingURL=main.js.map

@@ -7,11 +7,13 @@ Object.defineProperty(exports, "__esModule", {
 var BadGuy = function BadGuy(x) {
 
   this.health = 100;
-  this.dmg = _.random(0, 45);
+  this.dmg = x.dmg || _.random(0, 45);
   this.badName = x.badName;
   this.warCry = x.warCry;
   this.deathMsg = x.deathMsg;
-  this.HealthBar = function () {};
+  // this.HealthBar = function(){
+
+  // };
   // this.hit = function (num) {
   //   let hitPoints = num || 10;
   //   return this.health = this.health - hitPoints;
@@ -22,27 +24,28 @@ exports["default"] = BadGuy;
 module.exports = exports["default"];
 
 },{}],2:[function(require,module,exports){
-"use strict";
+'use strict';
 
-Object.defineProperty(exports, "__esModule", {
+Object.defineProperty(exports, '__esModule', {
   value: true
 });
 var GoodGuy = function GoodGuy(x) {
-
   this.health = 100;
-  this.dmg = _.random(0, 45);
+  this.dmg = x.dmg || _.random(0, 45);
   this.goodName = x.goodName;
-  this.warCry = x.warCry;
+  this.warCry = x.warCry || 'Clippity Clop';
   this.deathMsg = x.deathMsg;
-  this.HealthBar = function () {};
+  // this.HealthBar = function(){
+
+  // };
   // this.hit = function (num) {
-  //   let hitPoints = num || 10;
-  //   return this.health = this.health - hitPoints;
+  //   let hitDmg = num || 1;
+  //   return this.health = this.health - hitDmg;}
   // };
 };
 
-exports["default"] = GoodGuy;
-module.exports = exports["default"];
+exports['default'] = GoodGuy;
+module.exports = exports['default'];
 
 },{}],3:[function(require,module,exports){
 'use strict';
@@ -107,6 +110,8 @@ var _BadGuy2 = _interopRequireDefault(_BadGuy);
       });
     });
   });
+
+  // describe('',)
 })();
 
 },{"./BadGuy":1,"./GoodGuy":2}]},{},[3])

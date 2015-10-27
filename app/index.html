@@ -6,8 +6,42 @@
   <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
-  <h1>Hello, <i class="fa fa-globe"></i></h1>
-  
+  <h1></h1>
+  <div class="GameWrap">
+    <div class="title">
+      <p class="startTitle">The Search for (un)Holy Rails!</p>
+    </div>
+    <div class="start" id="start">
+      <div class="startTitle">
+        <span>Do you dare search for Rails?</span>
+      </div>
+      <div class="selectBox">
+        <button id="startGame">Start Game</button>
+        <button class="credits">Credits</button>
+        <button class="quitGame">Too Hard, I Quit</button>
+      </div>
+    </div>
+    <div class="Scene">
+      <div class="goodGuy">
+        <div class="gtext"></div>
+        <div class="gname"></div>
+        <div class="ghealth"></div>
+        <div class="image buttons"><button class="attack">Attack!</button></div>
+      </div>
+      <div class="badGuy">
+        <div class="btext"></div>
+        <div class="bname"></div>
+        <div class="bhealth"></div>
+      </div>
+      <div class="fight"></div>
+    </div>
+
+    <div class="win"><button class="Continue"></button></div>
+    <div class="lose">
+      <button>Quest again!</button>
+      <button>Give up like a pansy!</button>
+    </div>
+  </div>
   <script src="js/main.js"></script>
 </body>
 </html>

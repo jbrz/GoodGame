@@ -1,27 +1,22 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-"use strict";
+'use strict';
 
-Object.defineProperty(exports, "__esModule", {
+Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var BadGuy = function BadGuy(x) {
-
+var Guy = function Guy(name, warCry, deathMsg) {
+  this.guyName = name || 'Random Coconut Clapper';
+  this.warCry = warCry || 'Clippity Clop';
+  this.deathMsg = deathMsg || 'Forgive me, JS!';
   this.health = 100;
-  this.dmg = x.dmg || _.random(0, 45);
-  this.badName = x.badName;
-  this.warCry = x.warCry;
-  this.deathMsg = x.deathMsg;
-  // this.HealthBar = function(){
-
-  // };
-  // this.hit = function (num) {
-  //   let hitPoints = num || 10;
-  //   return this.health = this.health - hitPoints;
-  // };
+  this.hit = function (num) {
+    var hitDmg = num || 1;
+    return this.health = this.health - hitDmg;
+  };
 };
 
-exports["default"] = BadGuy;
-module.exports = exports["default"];
+exports['default'] = Guy;
+module.exports = exports['default'];
 
 },{}],2:[function(require,module,exports){
 'use strict';
@@ -29,26 +24,6 @@ module.exports = exports["default"];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var GoodGuy = function GoodGuy(x) {
-  this.health = 100;
-  this.dmg = x.dmg || _.random(0, 45);
-  this.goodName = x.goodName;
-  this.warCry = x.warCry || 'Clippity Clop';
-  this.deathMsg = x.deathMsg;
-  // this.HealthBar = function(){
-
-  // };
-  // this.hit = function (num) {
-  //   let hitDmg = num || 1;
-  //   return this.health = this.health - hitDmg;}
-  // };
-};
-
-exports['default'] = GoodGuy;
-module.exports = exports['default'];
-
-},{}],3:[function(require,module,exports){
-'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -68,16 +43,20 @@ var _GoodGuy = require('./GoodGuy');
 
 var _GoodGuy2 = _interopRequireDefault(_GoodGuy);
 
-var _BadGuy = require('./BadGuy');
-
-var _BadGuy2 = _interopRequireDefault(_BadGuy);
-
 console.log('Hello, World');
 
-var Scene = function Scene(x) {
-  this.text = x.text;
-  this.bg = x.bg;
-  this.enemies = x.enemies || null;
+var Scene = function Scene(options) {
+  this.text = options.text || 'text';
+  this.sname = options.sname || 'defaultScene';
+  this.bg = options.bg || 'URL Missing';
+  this.enemies = options.enemies || 'none';
+};
+exports.Scene = Scene;
+
+var Continue = function Continue(options) {
+  this.text = options.text || 'Continue...';
+  this['class'] = options['class'] || '.continue';
+  this.attribs = options.attribs || ['$defaultButton'];
 };
 
 var GameStart = function GameStart() {
@@ -88,22 +67,53 @@ var GameStart = function GameStart() {
 
   this.options = x.options || ['Start Game', 'Credits', 'Quit Game'];
   this.start = function (badguy) {
-    var arthur = new _GoodGuy2['default']({
-      dmg: 50,
-      goodName: 'Arthur',
-      warCry: 'For the holiest of Rails!',
-      deathMsg: 'JavaScript...has been...DEFEATED!'
-    });
-    var arthursMount = new _GoodGuy2['default']({
-      dmg: 1,
-      goodName: 'Patsy'
-    });
+    var arthur = new _GoodGuy2['default']('Arthur', 'For the holiest of Rails!', 'JavaScript...has been...DEFEATED!');
+    var arthursMount = new _GoodGuy2['default']('Patsy');
   };
 };
 
-// startGame.on('click', function () {};
+var startGame = (0, _jquery2['default'])('#startGame');
+startGame.on('click', function () {
+  new Continue();
+  var firstScene = new Scene({
+    sname: 'Intro',
+    text: 'Your quest? To find the Holy Rails! Many have tried, few have succeeded. But with the banner of JS to protect you, you have a non-0% chance of succeeding. If we did the math right. Good luck!',
+    bg: 'URL'
+  });
+  (0, _jquery2['default'])(document.body).css('background-size', 'cover');
+  (0, _jquery2['default'])(document.body).css('background-color', 'black');
+  (0, _jquery2['default'])(document.body).css('background-repeat', 'no-repeat');
+  (0, _jquery2['default'])('.Scene').css('background-image', 'url(./images/Start.jpg)');
+});
 
-},{"./BadGuy":1,"./GoodGuy":2,"jquery":4,"moment":5,"underscore":6}],4:[function(require,module,exports){
+var credits = (0, _jquery2['default'])('#credits');
+credits.on('click', function () {
+  new Credits();
+});
+
+var contButton = (0, _jquery2['default'])('.continue');
+contButton.on('click', function () {
+  var LoadScene = function LoadScene(sceneOptions) {
+    new Scene(sceneOptions);
+  };
+});
+
+// Bad Dudes
+var watKnight = new _GoodGuy2['default']('Wat Knight', 'None can defeat the Wat Knight!', 'Tis only a flesh wound!');
+var timTheWizard = new _GoodGuy2['default']('Tim the Wizard', 'Quite!', 'Death awaits you all with nasty, big, pointy teeth!');
+var railBit = new _GoodGuy2['default']('The Holy Grailbbit!', 'nomnomnom', 'x.x');
+
+//Bad Dudes Fighting
+var watKnightFight = arthur.hit(1);
+var timTheHitzard = arthur.hit(_underscore2['default'].random(0, 20));
+var railBitHit = arthur.hit(_underscore2['default'].random(0, 45));
+
+// Arthur Fighting
+var arthurFight1 = watKnight.hit(_random(0, 45));
+var arthurFight2 = watKnight.hit(_random(0, 45));
+var arthurFight3 = watKnight.hit(_random(0, 45));
+
+},{"./GoodGuy":1,"jquery":3,"moment":4,"underscore":5}],3:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -9315,7 +9325,7 @@ return jQuery;
 
 }));
 
-},{}],5:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 //! moment.js
 //! version : 2.10.6
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -12511,7 +12521,7 @@ return jQuery;
     return _moment;
 
 }));
-},{}],6:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -14061,7 +14071,7 @@ return jQuery;
   }
 }.call(this));
 
-},{}]},{},[3])
+},{}]},{},[2])
 
 
 //# sourceMappingURL=main.js.map

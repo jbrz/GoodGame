@@ -1,18 +1,13 @@
-let GoodGuy = function (x) {
+let Guy = function (name,warCry,deathMsg) {
+  this.guyName = name || 'Random Coconut Clapper';
+  this.warCry = warCry || 'Clippity Clop';
+  this.deathMsg = deathMsg || 'Forgive me, JS!';
   this.health = 100;
-  this.dmg = x.dmg || _.random(0,45);
-  this.goodName = x.goodName;
-  this.warCry = x.warCry || 'Clippity Clop';
-  this.deathMsg = x.deathMsg;
-  // this.HealthBar = function(){
-
-  // };
-  // this.hit = function (num) {
-  //   let hitDmg = num || 1;
-  //   return this.health = this.health - hitDmg;}
-  // };
-
+  this.hit = function (num){
+    let hitDmg = num || 1;
+    return this.health = this.health - hitDmg;
+  };
 };
 
 
-export default GoodGuy;
+export default Guy;

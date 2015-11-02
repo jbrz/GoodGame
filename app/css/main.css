@@ -2066,14 +2066,48 @@ body {
       margin: 0; }
 
 .Scene {
-  display: inline-block;
+  display: block;
   max-width: 800px;
-  min-height: 600px;
+  max-height: 600px;
   margin-right: auto;
   margin-left: auto; }
   .Scene .goodGuy {
-    float: left; }
+    float: left;
+    height: 500px;
+    width: 45%;
+    position: relative; }
+    .Scene .goodGuy div {
+      position: absolute; }
+    .Scene .goodGuy .gtext {
+      top: 5%;
+      left: 3%; }
+    .Scene .goodGuy .gname {
+      bottom: 10%;
+      left: 3%; }
+    .Scene .goodGuy .goodHealth {
+      bottom: 5%;
+      left: 3%; }
   .Scene .badGuy {
-    float: right; }
+    float: right;
+    height: 500px;
+    width: 45%;
+    position: relative; }
+    .Scene .badGuy div {
+      position: absolute; }
+    .Scene .badGuy .btext {
+      top: 5%;
+      right: 3%; }
+    .Scene .badGuy .bname {
+      bottom: 10%;
+      right: 3%; }
+    .Scene .badGuy .badHealth {
+      bottom: 5%;
+      right: 3%; }
+
+.endgame {
+  max-width: 800px;
+  max-height: 600px;
+  margin-right: auto;
+  margin-left: auto; }
 
 /*# sourceMappingURL=main.css.map */

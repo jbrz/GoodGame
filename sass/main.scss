@@ -61,18 +61,68 @@ body {
 }
 
 .Scene {
-  display: inline-block;
+  display: block;
   // min-width: 800px;
   max-width: 800px;
-  min-height: 600px;
+  max-height: 600px;
   margin-right: auto;
   margin-left: auto;
 
   .goodGuy {
     float: left;
+    height: 500px;
+    width: 45%;
+    position: relative;
+
+    div {
+      position: absolute;
+    }
+    .gtext {
+      top: 5%;
+      left: 3%;
+    }
+
+    .gname {
+      bottom: 10%;
+      left: 3%;
+    }
+
+    .goodHealth {
+      bottom: 5%;
+      left: 3%;
+    }
   }
 
   .badGuy {
     float: right;
+    height: 500px;
+    width: 45%;
+    position: relative;
+
+    div {
+      position: absolute;
+    }
+
+    .btext {
+      top: 5%;
+      right: 3%;
+    }
+
+    .bname {
+      bottom: 10%;
+      right: 3%;
+    }
+
+    .badHealth {
+      bottom: 5%;
+      right: 3%;
+    }
   }
+}
+
+.endgame {
+  max-width: 800px;
+  max-height: 600px;
+  margin-right: auto;
+  margin-left: auto;
 }

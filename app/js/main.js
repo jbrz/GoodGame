@@ -11,7 +11,7 @@ var _underscore = require('underscore');
 
 var _underscore2 = _interopRequireDefault(_underscore);
 
-var Guy = function Guy(name, warCry, deathMsg, health) {
+var Guy = function Guy(name, warCry, deathMsg, health, hit) {
   this.guyName = name || 'Random Coconut Clapper';
   this.warCry = warCry || 'Clippity Clop';
   this.deathMsg = deathMsg || 'Forgive me, JS!';
@@ -98,49 +98,48 @@ arthurFight1.on('click', function () {
   arthur.hit(1);
   console.log(arthur.health);
   if (arthur.health <= 0) {
-    lostgame;
+    lostgame();
   } else if (watKnight.health <= 0) {
     badHealth.text(watKnight.health);
     alert('You won!');
     (0, _jquery2['default'])('.Continue').removeClass('hidden');
     (0, _jquery2['default'])('.afight1').addClass('hidden');
-    victory;
   } else {
     goodHealth.text(arthur.health);
     badHealth.text(watKnight.health);
   };
 });
+
 var arthurFight2 = (0, _jquery2['default'])('.afight2');
 arthurFight2.on('click', function () {
   var num = _underscore2['default'].random(15, 50);
   timTheWizard.hit(num);
-  timTheHitzard;
+  arthur.hit(_underscore2['default'].random(15, 35));
   if (arthur.health <= 0) {
-    lostgame;
+    lostgame();
   } else if (timTheWizard.health <= 0) {
     badHealth.text(timTheWizard.health);
     alert('You won!');
     (0, _jquery2['default'])('.Continue').removeClass('hidden');
     (0, _jquery2['default'])('.afight2').addClass('hidden');
-    victory;
   } else {
     goodHealth.text(arthur.health);
     badHealth.text(timTheWizard.health);
   };
 });
+
 var arthurFight3 = (0, _jquery2['default'])('.afight3');
 arthurFight3.on('click', function () {
   var num = _underscore2['default'].random(15, 50);
   railBit.hit(num);
-  railBitHit;
+  arthur.hit(_underscore2['default'].random(25, 45));
   if (arthur.health <= 0) {
-    lostgame;
+    lostgame();
   } else if (railBit.health <= 0) {
     badHealth.text(railBit.health);
     alert('You won!');
     (0, _jquery2['default'])('.Continue').removeClass('hidden');
     (0, _jquery2['default'])('.afight3').addClass('hidden');
-    victory;
   } else {
     goodHealth.text(arthur.health);
     badHealth.text(railBit.health);
@@ -151,9 +150,11 @@ arthurFight3.on('click', function () {
 // Start Button
 var startGame = (0, _jquery2['default'])('#startGame');
 startGame.on('click', function () {
+  (0, _jquery2['default'])('.endgame').addClass('hidden');
   (0, _jquery2['default'])('.start').addClass('hidden');
   (0, _jquery2['default'])('.attack').addClass('hidden');
   (0, _jquery2['default'])('.Scene').removeClass('hidden');
+  (0, _jquery2['default'])('.Continue').removeClass('hidden');
   var firstScene = new _Scene2['default']('Your quest? To find the Holy Rails! Many have tried, Brit has succeeded. But with the banner of JS to protect you, you have a non-0% chance of succeeding. If we did the math right. Good luck!', 'Intro', '../images/Start.jpg');
   (0, _jquery2['default'])('.Stext').text(firstScene.text);
   (0, _jquery2['default'])('.Scene').css('background-image', '../images/Start.jpg');
@@ -166,9 +167,10 @@ credits.on('click', function () {
   (0, _jquery2['default'])('.start').addClass('hidden');
   (0, _jquery2['default'])('.Scene').removeClass('hidden');
   (0, _jquery2['default'])('.badGuy').addClass('hidden');
-  (0, _jquery2['default'])('.GoodGuy').addClass('hidden');
+  (0, _jquery2['default'])('.goodGuy').addClass('hidden');
   (0, _jquery2['default'])('.Stext').text(credScene.sname);
   (0, _jquery2['default'])('.Stext').html(credScene.text);
+  (0, _jquery2['default'])('.Continue').removeClass('hidden');
 });
 
 // Quit Button
@@ -182,10 +184,26 @@ quit.on('click', function () {
   alert('This might be coded in javascript, but your loss means Rails is victorious :(');
 });
 
+var lostgame = function lostgame() {
+  var lostScene = new _Scene2['default']("Sorry old chap, you've failed us all", "loser", './images/loser.jpeg');
+  watKnight.health = 100;
+  timTheWizard.health = 125;
+  railBit.health = 150;
+  (0, _jquery2['default'])('.start').addClass('hidden');
+  (0, _jquery2['default'])('.Scene').addClass('hidden');
+  (0, _jquery2['default'])('.goodGuy').addClass('hidden');
+  (0, _jquery2['default'])('.badGuy').addClass('hidden');
+  (0, _jquery2['default'])('.endgame').removeClass('hidden');
+  (0, _jquery2['default'])('.win').addClass('hidden');
+  (0, _jquery2['default'])('.lose').removeClass('hidden');
+  alert('This might be coded in javascript, but your loss means Rails is victorious :(');
+};
+
 var playAgain = (0, _jquery2['default'])('.playAgain');
 var nope = (0, _jquery2['default'])('.nope');
 playAgain.on('click', function () {
   startGame.click();
+  (0, _jquery2['default'])('.Continue').removeClass('hidden');
 });
 
 nope.on('click', function () {
@@ -197,28 +215,36 @@ nope.on('click', function () {
 var cont = (0, _jquery2['default'])('.Continue');
 cont.on('click', function () {
   if (watKnight.health <= 0 && timTheWizard.health > 0) {
+    arthur.health = 100;
     var timScene = new _Scene2['default']('*WOOOSH* with a flash of white hot fire, Tim the Wizard appears before you, spouting gibberish that sounds like php - but also promising the location of the Holy Rail, on one condition: that you best him in combat!', 'Fight Tim', '../images/timbg.jpg');
     (0, _jquery2['default'])('.Continue').addClass('hidden');
     (0, _jquery2['default'])('.Scene').removeClass('hidden');
     (0, _jquery2['default'])('.afight2').removeClass('hidden');
+    (0, _jquery2['default'])('.goodGuy').removeClass('hidden');
     (0, _jquery2['default'])('.badGuy').removeClass('hidden');
     (0, _jquery2['default'])('.btext').text(timScene.text);
-    (0, _jquery2['default'])('.bname').text(timScene.title);
+    (0, _jquery2['default'])('.bname').text(timScene.sname);
+    (0, _jquery2['default'])('.goodHealth').text(arthur.health);
     (0, _jquery2['default'])('.badHealth').text(timTheWizard.health);
-    (0, _jquery2['default'])('.Scene').css('background-image', '../images/');
+    (0, _jquery2['default'])('.Scene').css('background-image', '../images/tim.png');
   } else if (timTheWizard.health <= 0 && railBit.health > 0) {
+    arthur.health = 100;
     var bitScene = new _Scene2['default']('*nomnomNOM* - you hear the sounds of furious eating as you enter the caves of SQL.  The culprit, you find, is a cute-looking, fluffy bunny - only once it sees you, it charges, its teeth bared in a pattern that reminds you of mindless data entry.', 'Fight the RailBit', '../images/railbg.jpg');
     (0, _jquery2['default'])('.Continue').addClass('hidden');
     (0, _jquery2['default'])('.Scene').removeClass('hidden');
     (0, _jquery2['default'])('.afight3').removeClass('hidden');
+    (0, _jquery2['default'])('.goodGuy').removeClass('hidden');
     (0, _jquery2['default'])('.badGuy').removeClass('hidden');
     (0, _jquery2['default'])('.btext').text(bitScene.text);
-    (0, _jquery2['default'])('.bname').text(bitScene.title);
+    (0, _jquery2['default'])('.bname').text(bitScene.sname);
+    (0, _jquery2['default'])('.goodHealth').text(arthur.health);
     (0, _jquery2['default'])('.badHealth').text(railBit.health);
   } else if (railBit.health <= 0) {
+    arthur.health = 100;
     var victoryScene = new _Scene2['default']('You did it.  The RailBit was defeated, the Holy Rail is now yours!', 'Victory', '../images/victory.png');
     (0, _jquery2['default'])('.Continue').addClass('hidden');
     (0, _jquery2['default'])('.badGuy').addClass('hidden');
+    (0, _jquery2['default'])('.goodGuy');
     (0, _jquery2['default'])('.Stext').text(victoryScene.text);
     (0, _jquery2['default'])('.Scene').css('background-image', '../images/victory.jpg');
     setTimeout(function () {
@@ -229,30 +255,22 @@ cont.on('click', function () {
       credits.click();
     }, 5000);
   } else {
+    arthur.health = 100;
     var watScene = new _Scene2['default']('the watKnight guards the bridge out of the forest.  It is said he cannot be bested in combat.  You will have to be the first...', 'Fight the watKnight!', '../images/watbg.jpg');
     (0, _jquery2['default'])('.Stext').text('');
     (0, _jquery2['default'])('.Continue').addClass('hidden');
     (0, _jquery2['default'])('.Scene').removeClass('hidden');
     (0, _jquery2['default'])('.afight1').removeClass('hidden');
+    (0, _jquery2['default'])('.goodGuy').removeClass('hidden');
+    (0, _jquery2['default'])('.gtext').text('You are Arthur, King of the Britons. None can defeat you (usually)!');
+    (0, _jquery2['default'])('.gname').text('Arthur, King of the Britons, Lord of the British Isles.');
     (0, _jquery2['default'])('.badGuy').removeClass('hidden');
     (0, _jquery2['default'])('.btext').text(watScene.text);
-    (0, _jquery2['default'])('.bname').text(watScene.title);
+    (0, _jquery2['default'])('.bname').text(watScene.sname);
+    (0, _jquery2['default'])('.goodHealth').text(arthur.health);
     (0, _jquery2['default'])('.badHealth').text(watKnight.health);(0, _jquery2['default'])('.Scene').css('background-image', '../images/');
   };
 });
-
-var victory = function victory() {
-  (0, _jquery2['default'])('.Scene').removeClass('hidden');
-};
-
-var lostgame = function lostgame() {
-  var lostScene = new _Scene2['default']("Sorry old chap, you've failed us all", "loser", './images/loser.jpeg');
-  (0, _jquery2['default'])('.start').addClass('hidden');
-  (0, _jquery2['default'])('.endgame').removeClass('hidden');
-  (0, _jquery2['default'])('.win').addClass('hidden');
-  (0, _jquery2['default'])('.lose').removeClass('hidden');
-  alert('This might be coded in javascript, but your loss means Rails is victorious :(');
-};
 
 console.log('Hello, World');
 

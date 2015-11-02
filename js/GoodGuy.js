@@ -1,6 +1,6 @@
 import _ from 'underscore';
 
-let Guy = function (name,warCry,deathMsg,health) {
+let Guy = function (name,warCry,deathMsg,health,hit) {
   this.guyName = name || 'Random Coconut Clapper';
   this.warCry = warCry || 'Clippity Clop';
   this.deathMsg = deathMsg || 'Forgive me, JS!';

@@ -11,7 +11,7 @@ var _underscore = require('underscore');
 
 var _underscore2 = _interopRequireDefault(_underscore);
 
-var Guy = function Guy(name, warCry, deathMsg, health) {
+var Guy = function Guy(name, warCry, deathMsg, health, hit) {
   this.guyName = name || 'Random Coconut Clapper';
   this.warCry = warCry || 'Clippity Clop';
   this.deathMsg = deathMsg || 'Forgive me, JS!';

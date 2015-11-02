@@ -130,9 +130,9 @@ arthurFight2.on('click', function () {
 
 var arthurFight3 = (0, _jquery2['default'])('.afight3');
 arthurFight3.on('click', function () {
-  var num = _underscore2['default'].random(15, 50);
+  var num = _underscore2['default'].random(35, 60);
   railBit.hit(num);
-  arthur.hit(_underscore2['default'].random(25, 45));
+  arthur.hit(_underscore2['default'].random(25, 40));
   if (arthur.health <= 0) {
     lostgame();
   } else if (railBit.health <= 0) {
@@ -216,7 +216,7 @@ var cont = (0, _jquery2['default'])('.Continue');
 cont.on('click', function () {
   if (watKnight.health <= 0 && timTheWizard.health > 0) {
     arthur.health = 100;
-    var timScene = new _Scene2['default']('*WOOOSH* with a flash of white hot fire, Tim the Wizard appears before you, spouting gibberish that sounds like php - but also promising the location of the Holy Rail, on one condition: that you best him in combat!', 'Fight Tim', '../images/timbg.jpg');
+    var timScene = new _Scene2['default']('*WOOOSH* with a flash of white hot fire, Tim the Wizard appears before you, spouting gibberish that sounds like php - but also promising the location of the Holy Rail, on one condition: that you best him in combat!', 'Fight Tim');
     (0, _jquery2['default'])('.Continue').addClass('hidden');
     (0, _jquery2['default'])('.Scene').removeClass('hidden');
     (0, _jquery2['default'])('.afight2').removeClass('hidden');
@@ -226,10 +226,11 @@ cont.on('click', function () {
     (0, _jquery2['default'])('.bname').text(timScene.sname);
     (0, _jquery2['default'])('.goodHealth').text(arthur.health);
     (0, _jquery2['default'])('.badHealth').text(timTheWizard.health);
-    (0, _jquery2['default'])('.Scene').css('background-image', '../images/tim.png');
+    (0, _jquery2['default'])('.Scene').css('background-image', '../images/TimTheWizard.png');
   } else if (timTheWizard.health <= 0 && railBit.health > 0) {
     arthur.health = 100;
     var bitScene = new _Scene2['default']('*nomnomNOM* - you hear the sounds of furious eating as you enter the caves of SQL.  The culprit, you find, is a cute-looking, fluffy bunny - only once it sees you, it charges, its teeth bared in a pattern that reminds you of mindless data entry.', 'Fight the RailBit', '../images/railbg.jpg');
+    (0, _jquery2['default'])('.Scene').css('background-image', '../images/rabbit.jpg');
     (0, _jquery2['default'])('.Continue').addClass('hidden');
     (0, _jquery2['default'])('.Scene').removeClass('hidden');
     (0, _jquery2['default'])('.afight3').removeClass('hidden');
@@ -246,7 +247,7 @@ cont.on('click', function () {
     (0, _jquery2['default'])('.badGuy').addClass('hidden');
     (0, _jquery2['default'])('.goodGuy');
     (0, _jquery2['default'])('.Stext').text(victoryScene.text);
-    (0, _jquery2['default'])('.Scene').css('background-image', '../images/victory.jpg');
+    (0, _jquery2['default'])('.Scene').css('background-image', '../images/victory.png');
     setTimeout(function () {
       (0, _jquery2['default'])('.Scene').addClass('hidden');
       (0, _jquery2['default'])('.endgame').removeClass('hidden');
@@ -268,7 +269,7 @@ cont.on('click', function () {
     (0, _jquery2['default'])('.btext').text(watScene.text);
     (0, _jquery2['default'])('.bname').text(watScene.sname);
     (0, _jquery2['default'])('.goodHealth').text(arthur.health);
-    (0, _jquery2['default'])('.badHealth').text(watKnight.health);(0, _jquery2['default'])('.Scene').css('background-image', '../images/');
+    (0, _jquery2['default'])('.badHealth').text(watKnight.health);(0, _jquery2['default'])('.Scene').css('background-image', '../images/Black_Knight.jpg');
   };
 });
 

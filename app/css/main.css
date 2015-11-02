@@ -2075,7 +2075,8 @@ body {
     float: left;
     height: 500px;
     width: 45%;
-    position: relative; }
+    position: relative;
+    background-image: '../images/arthur.jpg'; }
     .Scene .goodGuy div {
       position: absolute; }
     .Scene .goodGuy .gtext {

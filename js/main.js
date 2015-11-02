@@ -69,9 +69,9 @@ let railBit = new Guy('The Holy Railbbit!','nomnomnom','x.x',150);
 
     let arthurFight3 = $('.afight3');
     arthurFight3.on('click', function(){
-      let num = _.random(15,50);
+      let num = _.random(35,60);
       railBit.hit(num);
-      arthur.hit(_.random(25,45));
+      arthur.hit(_.random(25,40));
       if (arthur.health <= 0) {
         lostgame();
       } else if (railBit.health <= 0) {
@@ -155,7 +155,7 @@ let railBit = new Guy('The Holy Railbbit!','nomnomnom','x.x',150);
   cont.on('click',function(){
     if (watKnight.health <= 0 && timTheWizard.health > 0) {
       arthur.health = 100;
-      let timScene = new Scene('*WOOOSH* with a flash of white hot fire, Tim the Wizard appears before you, spouting gibberish that sounds like php - but also promising the location of the Holy Rail, on one condition: that you best him in combat!','Fight Tim','../images/timbg.jpg');
+      let timScene = new Scene('*WOOOSH* with a flash of white hot fire, Tim the Wizard appears before you, spouting gibberish that sounds like php - but also promising the location of the Holy Rail, on one condition: that you best him in combat!','Fight Tim');
       $('.Continue').addClass('hidden');
       $('.Scene').removeClass('hidden');
       $('.afight2').removeClass('hidden');
@@ -165,10 +165,11 @@ let railBit = new Guy('The Holy Railbbit!','nomnomnom','x.x',150);
       $('.bname').text(timScene.sname);
       $('.goodHealth').text(arthur.health);
       $('.badHealth').text(timTheWizard.health);
-      $('.Scene').css('background-image', '../images/tim.png');
+      $('.Scene').css('background-image', '../images/TimTheWizard.png');
     } else if (timTheWizard.health <= 0 && railBit.health > 0) {
       arthur.health = 100;
       let bitScene = new Scene('*nomnomNOM* - you hear the sounds of furious eating as you enter the caves of SQL.  The culprit, you find, is a cute-looking, fluffy bunny - only once it sees you, it charges, its teeth bared in a pattern that reminds you of mindless data entry.','Fight the RailBit','../images/railbg.jpg');
+      $('.Scene').css('background-image','../images/rabbit.jpg');
       $('.Continue').addClass('hidden');
       $('.Scene').removeClass('hidden');
       $('.afight3').removeClass('hidden');
@@ -185,7 +186,7 @@ let railBit = new Guy('The Holy Railbbit!','nomnomnom','x.x',150);
       $('.badGuy').addClass('hidden');
       $('.goodGuy')
       $('.Stext').text(victoryScene.text);
-      $('.Scene').css('background-image','../images/victory.jpg');
+      $('.Scene').css('background-image','../images/victory.png');
       setTimeout(function(){
         $('.Scene').addClass('hidden');
         $('.endgame').removeClass('hidden');
@@ -207,7 +208,7 @@ let railBit = new Guy('The Holy Railbbit!','nomnomnom','x.x',150);
       $('.btext').text(watScene.text);
       $('.bname').text(watScene.sname);
       $('.goodHealth').text(arthur.health);
-      $('.badHealth').text(watKnight.health);      $('.Scene').css('background-image', '../images/');
+      $('.badHealth').text(watKnight.health);      $('.Scene').css('background-image', '../images/Black_Knight.jpg');
     };
   });
 

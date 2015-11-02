@@ -4,11 +4,18 @@
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var Guy = function Guy(name, warCry, deathMsg) {
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _underscore = require('underscore');
+
+var _underscore2 = _interopRequireDefault(_underscore);
+
+var Guy = function Guy(name, warCry, deathMsg, health) {
   this.guyName = name || 'Random Coconut Clapper';
   this.warCry = warCry || 'Clippity Clop';
   this.deathMsg = deathMsg || 'Forgive me, JS!';
-  this.health = 100;
+  this.health = health || 100;
   this.hit = function (num) {
     var hitDmg = num || 1;
     return this.health = this.health - hitDmg;
@@ -18,12 +25,23 @@ var Guy = function Guy(name, warCry, deathMsg) {
 exports['default'] = Guy;
 module.exports = exports['default'];
 
-},{}],2:[function(require,module,exports){
+},{"underscore":6}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
+var Scene = function Scene(text, sname, bg) {
+  this.text = text || "Default";
+  this.sname = sname || 'defaultScene';
+  this.bg = bg || 'none';
+};
+
+exports['default'] = Scene;
+module.exports = exports['default'];
+
+},{}],3:[function(require,module,exports){
+'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -43,77 +61,202 @@ var _GoodGuy = require('./GoodGuy');
 
 var _GoodGuy2 = _interopRequireDefault(_GoodGuy);
 
-console.log('Hello, World');
+var _Scene = require('./Scene');
 
-var Scene = function Scene(options) {
-  this.text = options.text || 'text';
-  this.sname = options.sname || 'defaultScene';
-  this.bg = options.bg || 'URL Missing';
-  this.enemies = options.enemies || 'none';
-};
-exports.Scene = Scene;
+var _Scene2 = _interopRequireDefault(_Scene);
 
-var Continue = function Continue(options) {
-  this.text = options.text || 'Continue...';
-  this['class'] = options['class'] || '.continue';
-  this.attribs = options.attribs || ['$defaultButton'];
-};
-
-var GameStart = function GameStart() {
-  Scene({
-    text: "You must find the holy Rails!",
-    bg: 'images/Start.png'
-  });
-
-  this.options = x.options || ['Start Game', 'Credits', 'Quit Game'];
-  this.start = function (badguy) {
-    var arthur = new _GoodGuy2['default']('Arthur', 'For the holiest of Rails!', 'JavaScript...has been...DEFEATED!');
-    var arthursMount = new _GoodGuy2['default']('Patsy');
+(function load() {
+  window.onload = function () {
+    (0, _jquery2['default'])('.Scene').addClass('hidden');
+    (0, _jquery2['default'])('.endgame').addClass('hidden');
   };
-};
+})();
 
-var startGame = (0, _jquery2['default'])('#startGame');
-startGame.on('click', function () {
-  new Continue();
-  var firstScene = new Scene({
-    sname: 'Intro',
-    text: 'Your quest? To find the Holy Rails! Many have tried, few have succeeded. But with the banner of JS to protect you, you have a non-0% chance of succeeding. If we did the math right. Good luck!',
-    bg: 'URL'
-  });
-  (0, _jquery2['default'])(document.body).css('background-size', 'cover');
-  (0, _jquery2['default'])(document.body).css('background-color', 'black');
-  (0, _jquery2['default'])(document.body).css('background-repeat', 'no-repeat');
-  (0, _jquery2['default'])('.Scene').css('background-image', 'url(./images/Start.jpg)');
-});
-
-var credits = (0, _jquery2['default'])('#credits');
-credits.on('click', function () {
-  new Credits();
-});
-
-var contButton = (0, _jquery2['default'])('.continue');
-contButton.on('click', function () {
-  var LoadScene = function LoadScene(sceneOptions) {
-    new Scene(sceneOptions);
-  };
-});
-
+//GoodGuys
+var arthur = new _GoodGuy2['default']('Arthur', 'For the holiest of Rails!', 'JavaScript...has been...DEFEATED!', 100);
+var arthursMount = new _GoodGuy2['default']('Patsy');
 // Bad Dudes
-var watKnight = new _GoodGuy2['default']('Wat Knight', 'None can defeat the Wat Knight!', 'Tis only a flesh wound!');
-var timTheWizard = new _GoodGuy2['default']('Tim the Wizard', 'Quite!', 'Death awaits you all with nasty, big, pointy teeth!');
-var railBit = new _GoodGuy2['default']('The Holy Grailbbit!', 'nomnomnom', 'x.x');
+var watKnight = new _GoodGuy2['default']('Wat Knight', 'None can defeat the Wat Knight!', 'Tis only a flesh wound!', 100);
+var timTheWizard = new _GoodGuy2['default']('Tim the Wizard', 'Quite!', 'Death awaits you all with nasty, big, pointy teeth!', 125);
+var railBit = new _GoodGuy2['default']('The Holy Railbbit!', 'nomnomnom', 'x.x', 150);
 
+// Health
+var goodHealth = (0, _jquery2['default'])('.goodHealth');
+var badHealth = (0, _jquery2['default'])('.badHealth');
+
+// Fighting
 //Bad Dudes Fighting
 var watKnightFight = arthur.hit(1);
-var timTheHitzard = arthur.hit(_underscore2['default'].random(0, 20));
-var railBitHit = arthur.hit(_underscore2['default'].random(0, 45));
+var timTheHitzard = arthur.hit(_underscore2['default'].random(15, 35));
+var railBitHit = arthur.hit(_underscore2['default'].random(25, 45));
 
-// Arthur Fighting
-var arthurFight1 = watKnight.hit(_random(0, 45));
-var arthurFight2 = watKnight.hit(_random(0, 45));
-var arthurFight3 = watKnight.hit(_random(0, 45));
+// Arthur Buttons
+var arthurFight1 = (0, _jquery2['default'])('.afight1');
+arthurFight1.on('click', function () {
+  var num = _underscore2['default'].random(15, 50);
+  watKnight.hit(num);
+  arthur.hit(1);
+  console.log(arthur.health);
+  if (arthur.health <= 0) {
+    lostgame;
+  } else if (watKnight.health <= 0) {
+    badHealth.text(watKnight.health);
+    alert('You won!');
+    (0, _jquery2['default'])('.Continue').removeClass('hidden');
+    (0, _jquery2['default'])('.afight1').addClass('hidden');
+    victory;
+  } else {
+    goodHealth.text(arthur.health);
+    badHealth.text(watKnight.health);
+  };
+});
+var arthurFight2 = (0, _jquery2['default'])('.afight2');
+arthurFight2.on('click', function () {
+  var num = _underscore2['default'].random(15, 50);
+  timTheWizard.hit(num);
+  timTheHitzard;
+  if (arthur.health <= 0) {
+    lostgame;
+  } else if (timTheWizard.health <= 0) {
+    badHealth.text(timTheWizard.health);
+    alert('You won!');
+    (0, _jquery2['default'])('.Continue').removeClass('hidden');
+    (0, _jquery2['default'])('.afight2').addClass('hidden');
+    victory;
+  } else {
+    goodHealth.text(arthur.health);
+    badHealth.text(timTheWizard.health);
+  };
+});
+var arthurFight3 = (0, _jquery2['default'])('.afight3');
+arthurFight3.on('click', function () {
+  var num = _underscore2['default'].random(15, 50);
+  railBit.hit(num);
+  railBitHit;
+  if (arthur.health <= 0) {
+    lostgame;
+  } else if (railBit.health <= 0) {
+    badHealth.text(railBit.health);
+    alert('You won!');
+    (0, _jquery2['default'])('.Continue').removeClass('hidden');
+    (0, _jquery2['default'])('.afight3').addClass('hidden');
+    victory;
+  } else {
+    goodHealth.text(arthur.health);
+    badHealth.text(railBit.health);
+  };
+});
 
-},{"./GoodGuy":1,"jquery":3,"moment":4,"underscore":5}],3:[function(require,module,exports){
+// Menu Buttons
+// Start Button
+var startGame = (0, _jquery2['default'])('#startGame');
+startGame.on('click', function () {
+  (0, _jquery2['default'])('.start').addClass('hidden');
+  (0, _jquery2['default'])('.attack').addClass('hidden');
+  (0, _jquery2['default'])('.Scene').removeClass('hidden');
+  var firstScene = new _Scene2['default']('Your quest? To find the Holy Rails! Many have tried, Brit has succeeded. But with the banner of JS to protect you, you have a non-0% chance of succeeding. If we did the math right. Good luck!', 'Intro', '../images/Start.jpg');
+  (0, _jquery2['default'])('.Stext').text(firstScene.text);
+  (0, _jquery2['default'])('.Scene').css('background-image', '../images/Start.jpg');
+});
+
+// Credits
+var credits = (0, _jquery2['default'])('#credits');
+credits.on('click', function () {
+  var credScene = new _Scene2['default']('<ul class="credits"><li>Me</li><li>Tim&JD</li><li>My Roommate, who suffered through many long days of blasting music and confusing rants about javascript</li></ul>', 'Credits');
+  (0, _jquery2['default'])('.start').addClass('hidden');
+  (0, _jquery2['default'])('.Scene').removeClass('hidden');
+  (0, _jquery2['default'])('.badGuy').addClass('hidden');
+  (0, _jquery2['default'])('.GoodGuy').addClass('hidden');
+  (0, _jquery2['default'])('.Stext').text(credScene.sname);
+  (0, _jquery2['default'])('.Stext').html(credScene.text);
+});
+
+// Quit Button
+var quit = (0, _jquery2['default'])('#quitGame');
+quit.on('click', function () {
+  var quitScene = new _Scene2['default']("Sorry old chap, you've failed us all", "loser", './images/loser.jpeg');
+  (0, _jquery2['default'])('.start').addClass('hidden');
+  (0, _jquery2['default'])('.endgame').removeClass('hidden');
+  (0, _jquery2['default'])('.win').addClass('hidden');
+  (0, _jquery2['default'])('.lose').removeClass('hidden');
+  alert('This might be coded in javascript, but your loss means Rails is victorious :(');
+});
+
+var playAgain = (0, _jquery2['default'])('.playAgain');
+var nope = (0, _jquery2['default'])('.nope');
+playAgain.on('click', function () {
+  startGame.click();
+});
+
+nope.on('click', function () {
+  alert('NEVER GIVE UP.  NEVER SURRENDER!');
+  startGame.click();
+});
+
+// Continue Button
+var cont = (0, _jquery2['default'])('.Continue');
+cont.on('click', function () {
+  if (watKnight.health <= 0 && timTheWizard.health > 0) {
+    var timScene = new _Scene2['default']('*WOOOSH* with a flash of white hot fire, Tim the Wizard appears before you, spouting gibberish that sounds like php - but also promising the location of the Holy Rail, on one condition: that you best him in combat!', 'Fight Tim', '../images/timbg.jpg');
+    (0, _jquery2['default'])('.Continue').addClass('hidden');
+    (0, _jquery2['default'])('.Scene').removeClass('hidden');
+    (0, _jquery2['default'])('.afight2').removeClass('hidden');
+    (0, _jquery2['default'])('.badGuy').removeClass('hidden');
+    (0, _jquery2['default'])('.btext').text(timScene.text);
+    (0, _jquery2['default'])('.bname').text(timScene.title);
+    (0, _jquery2['default'])('.badHealth').text(timTheWizard.health);
+    (0, _jquery2['default'])('.Scene').css('background-image', '../images/');
+  } else if (timTheWizard.health <= 0 && railBit.health > 0) {
+    var bitScene = new _Scene2['default']('*nomnomNOM* - you hear the sounds of furious eating as you enter the caves of SQL.  The culprit, you find, is a cute-looking, fluffy bunny - only once it sees you, it charges, its teeth bared in a pattern that reminds you of mindless data entry.', 'Fight the RailBit', '../images/railbg.jpg');
+    (0, _jquery2['default'])('.Continue').addClass('hidden');
+    (0, _jquery2['default'])('.Scene').removeClass('hidden');
+    (0, _jquery2['default'])('.afight3').removeClass('hidden');
+    (0, _jquery2['default'])('.badGuy').removeClass('hidden');
+    (0, _jquery2['default'])('.btext').text(bitScene.text);
+    (0, _jquery2['default'])('.bname').text(bitScene.title);
+    (0, _jquery2['default'])('.badHealth').text(railBit.health);
+  } else if (railBit.health <= 0) {
+    var victoryScene = new _Scene2['default']('You did it.  The RailBit was defeated, the Holy Rail is now yours!', 'Victory', '../images/victory.png');
+    (0, _jquery2['default'])('.Continue').addClass('hidden');
+    (0, _jquery2['default'])('.badGuy').addClass('hidden');
+    (0, _jquery2['default'])('.Stext').text(victoryScene.text);
+    (0, _jquery2['default'])('.Scene').css('background-image', '../images/victory.jpg');
+    setTimeout(function () {
+      (0, _jquery2['default'])('.Scene').addClass('hidden');
+      (0, _jquery2['default'])('.endgame').removeClass('hidden');
+      (0, _jquery2['default'])('.win').removeClass('hidden');
+      (0, _jquery2['default'])('.lose').addClass('hidden');
+      credits.click();
+    }, 5000);
+  } else {
+    var watScene = new _Scene2['default']('the watKnight guards the bridge out of the forest.  It is said he cannot be bested in combat.  You will have to be the first...', 'Fight the watKnight!', '../images/watbg.jpg');
+    (0, _jquery2['default'])('.Stext').text('');
+    (0, _jquery2['default'])('.Continue').addClass('hidden');
+    (0, _jquery2['default'])('.Scene').removeClass('hidden');
+    (0, _jquery2['default'])('.afight1').removeClass('hidden');
+    (0, _jquery2['default'])('.badGuy').removeClass('hidden');
+    (0, _jquery2['default'])('.btext').text(watScene.text);
+    (0, _jquery2['default'])('.bname').text(watScene.title);
+    (0, _jquery2['default'])('.badHealth').text(watKnight.health);(0, _jquery2['default'])('.Scene').css('background-image', '../images/');
+  };
+});
+
+var victory = function victory() {
+  (0, _jquery2['default'])('.Scene').removeClass('hidden');
+};
+
+var lostgame = function lostgame() {
+  var lostScene = new _Scene2['default']("Sorry old chap, you've failed us all", "loser", './images/loser.jpeg');
+  (0, _jquery2['default'])('.start').addClass('hidden');
+  (0, _jquery2['default'])('.endgame').removeClass('hidden');
+  (0, _jquery2['default'])('.win').addClass('hidden');
+  (0, _jquery2['default'])('.lose').removeClass('hidden');
+  alert('This might be coded in javascript, but your loss means Rails is victorious :(');
+};
+
+console.log('Hello, World');
+
+},{"./GoodGuy":1,"./Scene":2,"jquery":4,"moment":5,"underscore":6}],4:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -9325,7 +9468,7 @@ return jQuery;
 
 }));
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 //! moment.js
 //! version : 2.10.6
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -12521,7 +12664,7 @@ return jQuery;
     return _moment;
 
 }));
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -14071,7 +14214,7 @@ return jQuery;
   }
 }.call(this));
 
-},{}]},{},[2])
+},{}]},{},[3])
 
 
 //# sourceMappingURL=main.js.map

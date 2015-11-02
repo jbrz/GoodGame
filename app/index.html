@@ -7,40 +7,56 @@
 </head>
 <body>
   <h1></h1>
-  <div class="GameWrap">
+  <div class="GameWrapper">
+    
     <div class="title">
       <p class="startTitle">The Search for (un)Holy Rails!</p>
     </div>
+
     <div class="start" id="start">
       <div class="startTitle">
-        <span>Do you dare search for Rails?</span>
+        <span>Dare you search for the Holy Rail?</span>
       </div>
       <div class="selectBox">
         <button id="startGame">Start Game</button>
-        <button class="credits">Credits</button>
-        <button class="quitGame">Too Hard, I Quit</button>
+        <button id="credits">Credits</button>
+        <button id="quitGame">Too Hard, I Quit</button>
       </div>
     </div>
+
     <div class="Scene">
+    <p class="Stext"></p>
       <div class="goodGuy">
         <div class="gtext"></div>
         <div class="gname"></div>
-        <div class="ghealth"></div>
-        <div class="image buttons"><button class="attack">Attack!</button></div>
+        <div class="goodHealth"></div>
+        <div class="image buttons">
+          <button class="attack afight1 hidden">Attack!</button>
+          <button class="attack afight2 hidden">Attack!</button>
+          <button class="attack afight3 hidden">Attack!</button>
+        </div>
       </div>
       <div class="badGuy">
         <div class="btext"></div>
         <div class="bname"></div>
-        <div class="bhealth"></div>
+        <div class="badHealth"></div>
       </div>
-      <div class="fight"></div>
+      <div class="win"><button class="Continue">Continue...</button></div>
     </div>
 
-    <div class="win"><button class="Continue"></button></div>
-    <div class="lose">
-      <button>Quest again!</button>
-      <button>Give up like a pansy!</button>
+    <div class="endgame">
+      <div class="win">
+        <p class="winText">Congrats, you found the Holy Rails - you're practically Brit.</p>
+        <p class="playAgain">Give it another go?</p>
+      </div>
+      <div class="lose">
+        <div class="lose">
+          <button class="playAgain">Quest again!</button>
+          <button class="nope">Give up like a pansy!</button>
+        </div>
+      </div>
     </div>
+    
   </div>
   <script src="js/main.js"></script>
 </body>

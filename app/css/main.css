@@ -2021,25 +2021,37 @@
 body {
   background: #e2ebf3; }
 
+.GameWrapper {
+  width: 100%;
+  height: 100%; }
+
+.hidden {
+  display: none;
+  overflow: hidden;
+  height: 0;
+  width: 0; }
+
 .title {
-  display: block; }
+  display: inline-block;
+  width: 100%; }
   .title .startTitle {
-    position: absolute;
     font-size: 3em;
-    top: 10px;
-    left: 20%; }
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center; }
 
 .start {
   width: 300px;
   height: 250px;
   background: red;
+  border-radius: 15px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 250px; }
+  margin-top: 150px; }
   .start .startTitle {
     padding-top: 15px; }
     .start .startTitle span {
-      margin-left: 45px; }
+      margin-left: 30px; }
   .start .selectBox {
     display: inline-block;
     width: 130px;
@@ -2054,9 +2066,14 @@ body {
       margin: 0; }
 
 .Scene {
-  min-width: 800px;
+  display: inline-block;
+  max-width: 800px;
   min-height: 600px;
   margin-right: auto;
   margin-left: auto; }
+  .Scene .goodGuy {
+    float: left; }
+  .Scene .badGuy {
+    float: right; }
 
 /*# sourceMappingURL=main.css.map */

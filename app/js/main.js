@@ -155,9 +155,9 @@ startGame.on('click', function () {
   (0, _jquery2['default'])('.attack').addClass('hidden');
   (0, _jquery2['default'])('.Scene').removeClass('hidden');
   (0, _jquery2['default'])('.Continue').removeClass('hidden');
-  var firstScene = new _Scene2['default']('Your quest? To find the Holy Rails! Many have tried, Brit has succeeded. But with the banner of JS to protect you, you have a non-0% chance of succeeding. If we did the math right. Good luck!', 'Intro', '../images/Start.jpg');
+  var firstScene = new _Scene2['default']('Your quest? To find the Holy Rails! Many have tried, Brit has succeeded. But with the banner of JS to protect you, you have a non-0% chance of succeeding. If we did the math right. Good luck!', 'Intro', './images/Start.jpg');
   (0, _jquery2['default'])('.Stext').text(firstScene.text);
-  (0, _jquery2['default'])('.Scene').css('background-image', '../images/Start.jpg');
+  (0, _jquery2['default'])('.Scene').css('background-image', './images/Start.jpg');
 });
 
 // Credits
@@ -226,11 +226,11 @@ cont.on('click', function () {
     (0, _jquery2['default'])('.bname').text(timScene.sname);
     (0, _jquery2['default'])('.goodHealth').text(arthur.health);
     (0, _jquery2['default'])('.badHealth').text(timTheWizard.health);
-    (0, _jquery2['default'])('.Scene').css('background-image', '../images/TimTheWizard.png');
+    (0, _jquery2['default'])('.Scene').css('background-image', './images/TimTheWizard.png');
   } else if (timTheWizard.health <= 0 && railBit.health > 0) {
     arthur.health = 100;
-    var bitScene = new _Scene2['default']('*nomnomNOM* - you hear the sounds of furious eating as you enter the caves of SQL.  The culprit, you find, is a cute-looking, fluffy bunny - only once it sees you, it charges, its teeth bared in a pattern that reminds you of mindless data entry.', 'Fight the RailBit', '../images/railbg.jpg');
-    (0, _jquery2['default'])('.Scene').css('background-image', '../images/rabbit.jpg');
+    var bitScene = new _Scene2['default']('*nomnomNOM* - you hear the sounds of furious eating as you enter the caves of SQL.  The culprit, you find, is a cute-looking, fluffy bunny - only once it sees you, it charges, its teeth bared in a pattern that reminds you of mindless data entry.', 'Fight the RailBit', './images/railbg.jpg');
+    (0, _jquery2['default'])('.Scene').css('background-image', './images/rabbit.jpg');
     (0, _jquery2['default'])('.Continue').addClass('hidden');
     (0, _jquery2['default'])('.Scene').removeClass('hidden');
     (0, _jquery2['default'])('.afight3').removeClass('hidden');
@@ -242,12 +242,12 @@ cont.on('click', function () {
     (0, _jquery2['default'])('.badHealth').text(railBit.health);
   } else if (railBit.health <= 0) {
     arthur.health = 100;
-    var victoryScene = new _Scene2['default']('You did it.  The RailBit was defeated, the Holy Rail is now yours!', 'Victory', '../images/victory.png');
+    var victoryScene = new _Scene2['default']('You did it.  The RailBit was defeated, the Holy Rail is now yours!', 'Victory', './images/victory.png');
     (0, _jquery2['default'])('.Continue').addClass('hidden');
     (0, _jquery2['default'])('.badGuy').addClass('hidden');
     (0, _jquery2['default'])('.goodGuy');
     (0, _jquery2['default'])('.Stext').text(victoryScene.text);
-    (0, _jquery2['default'])('.Scene').css('background-image', '../images/victory.png');
+    (0, _jquery2['default'])('.Scene').css('background-image', './images/victory.png');
     setTimeout(function () {
       (0, _jquery2['default'])('.Scene').addClass('hidden');
       (0, _jquery2['default'])('.endgame').removeClass('hidden');
@@ -257,7 +257,7 @@ cont.on('click', function () {
     }, 5000);
   } else {
     arthur.health = 100;
-    var watScene = new _Scene2['default']('the watKnight guards the bridge out of the forest.  It is said he cannot be bested in combat.  You will have to be the first...', 'Fight the watKnight!', '../images/watbg.jpg');
+    var watScene = new _Scene2['default']('the watKnight guards the bridge out of the forest.  It is said he cannot be bested in combat.  You will have to be the first...', 'Fight the watKnight!', './images/watbg.jpg');
     (0, _jquery2['default'])('.Stext').text('');
     (0, _jquery2['default'])('.Continue').addClass('hidden');
     (0, _jquery2['default'])('.Scene').removeClass('hidden');
@@ -269,7 +269,7 @@ cont.on('click', function () {
     (0, _jquery2['default'])('.btext').text(watScene.text);
     (0, _jquery2['default'])('.bname').text(watScene.sname);
     (0, _jquery2['default'])('.goodHealth').text(arthur.health);
-    (0, _jquery2['default'])('.badHealth').text(watKnight.health);(0, _jquery2['default'])('.Scene').css('background-image', '../images/Black_Knight.jpg');
+    (0, _jquery2['default'])('.badHealth').text(watKnight.health);(0, _jquery2['default'])('.Scene').css('background-image', './images/Black_Knight.jpg');
   };
 });
 

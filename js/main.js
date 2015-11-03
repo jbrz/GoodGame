@@ -94,9 +94,9 @@ let railBit = new Guy('The Holy Railbbit!','nomnomnom','x.x',150);
       $('.attack').addClass('hidden');
       $('.Scene').removeClass('hidden');
       $('.Continue').removeClass('hidden');
-      let firstScene = new Scene('Your quest? To find the Holy Rails! Many have tried, Brit has succeeded. But with the banner of JS to protect you, you have a non-0% chance of succeeding. If we did the math right. Good luck!','Intro','../images/Start.jpg');
+      let firstScene = new Scene('Your quest? To find the Holy Rails! Many have tried, Brit has succeeded. But with the banner of JS to protect you, you have a non-0% chance of succeeding. If we did the math right. Good luck!','Intro','./images/Start.jpg');
       $('.Stext').text(firstScene.text);
-      $('.Scene').css('background-image', '../images/Start.jpg');
+      $('.Scene').css('background-image', './images/Start.jpg');
     });
 
   // Credits
@@ -165,11 +165,11 @@ let railBit = new Guy('The Holy Railbbit!','nomnomnom','x.x',150);
       $('.bname').text(timScene.sname);
       $('.goodHealth').text(arthur.health);
       $('.badHealth').text(timTheWizard.health);
-      $('.Scene').css('background-image', '../images/TimTheWizard.png');
+      $('.Scene').css('background-image', './images/TimTheWizard.png');
     } else if (timTheWizard.health <= 0 && railBit.health > 0) {
       arthur.health = 100;
-      let bitScene = new Scene('*nomnomNOM* - you hear the sounds of furious eating as you enter the caves of SQL.  The culprit, you find, is a cute-looking, fluffy bunny - only once it sees you, it charges, its teeth bared in a pattern that reminds you of mindless data entry.','Fight the RailBit','../images/railbg.jpg');
-      $('.Scene').css('background-image','../images/rabbit.jpg');
+      let bitScene = new Scene('*nomnomNOM* - you hear the sounds of furious eating as you enter the caves of SQL.  The culprit, you find, is a cute-looking, fluffy bunny - only once it sees you, it charges, its teeth bared in a pattern that reminds you of mindless data entry.','Fight the RailBit','./images/railbg.jpg');
+      $('.Scene').css('background-image','./images/rabbit.jpg');
       $('.Continue').addClass('hidden');
       $('.Scene').removeClass('hidden');
       $('.afight3').removeClass('hidden');
@@ -181,12 +181,12 @@ let railBit = new Guy('The Holy Railbbit!','nomnomnom','x.x',150);
       $('.badHealth').text(railBit.health);
     } else if (railBit.health <= 0) {
       arthur.health = 100;
-      let victoryScene = new Scene('You did it.  The RailBit was defeated, the Holy Rail is now yours!','Victory','../images/victory.png');
+      let victoryScene = new Scene('You did it.  The RailBit was defeated, the Holy Rail is now yours!','Victory','./images/victory.png');
       $('.Continue').addClass('hidden');
       $('.badGuy').addClass('hidden');
       $('.goodGuy')
       $('.Stext').text(victoryScene.text);
-      $('.Scene').css('background-image','../images/victory.png');
+      $('.Scene').css('background-image','./images/victory.png');
       setTimeout(function(){
         $('.Scene').addClass('hidden');
         $('.endgame').removeClass('hidden');
@@ -196,7 +196,7 @@ let railBit = new Guy('The Holy Railbbit!','nomnomnom','x.x',150);
       },5000);
     } else {
       arthur.health = 100;
-      let watScene = new Scene('the watKnight guards the bridge out of the forest.  It is said he cannot be bested in combat.  You will have to be the first...','Fight the watKnight!','../images/watbg.jpg');
+      let watScene = new Scene('the watKnight guards the bridge out of the forest.  It is said he cannot be bested in combat.  You will have to be the first...','Fight the watKnight!','./images/watbg.jpg');
       $('.Stext').text('');
       $('.Continue').addClass('hidden');
       $('.Scene').removeClass('hidden');
@@ -208,7 +208,7 @@ let railBit = new Guy('The Holy Railbbit!','nomnomnom','x.x',150);
       $('.btext').text(watScene.text);
       $('.bname').text(watScene.sname);
       $('.goodHealth').text(arthur.health);
-      $('.badHealth').text(watKnight.health);      $('.Scene').css('background-image', '../images/Black_Knight.jpg');
+      $('.badHealth').text(watKnight.health);      $('.Scene').css('background-image', './images/Black_Knight.jpg');
     };
   });
 
